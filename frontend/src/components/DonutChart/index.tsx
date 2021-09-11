@@ -13,10 +13,6 @@ function DonutChart() {
 
     const [chartData, setChartData] = useState<ChartData>({ labels: [], series: [] });
 
-
-
-
-
     useEffect(() => {
         axios.get(`${BASE_URL}/sales/amount-by-seller`)
             .then(response => {
@@ -27,12 +23,6 @@ function DonutChart() {
                 setChartData({ labels: myLabels, series: mySeries });
             });
     }, []);
-
-    //const mockData = {
-    //    series: [477138, 499928, 444867, 220426, 47308, 50010, 499928, 444867, 220426, 473088, 502088 ],
-    //   labels: ['Carlito Tevez', 'Airton Senna', 'Hebe Camargo', 'Marcos Mion', 'Neymar', 'João Dória', 'Jim Carrey',
-    //   'Wesley Safadão', 'Bon Jovi', 'Raul Seixas', 'Nelio Alves']
-    //}
 
     const options = {
         legend: {
