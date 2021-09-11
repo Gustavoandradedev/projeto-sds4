@@ -1,4 +1,27 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { SalePage } from "types/sale";
+import { formatLocalDate } from "utils/format";
+import { BASE_URL } from "utils/requests";
+
 function DataTable() {
+
+    const [page, setPage] = useState<SalePage>({
+        first: true,
+        last: true,
+        number: 0,
+        totalElements: 0,
+        totalPages: 0
+    });
+
+    useEffect(() => {
+        axios.get(`${BASE_URL}/sales?page=1&size=20&sort=date,desc`)
+            .then(response => {
+                setPage(response.data);
+            });
+    }, []);
+
+
     return (
         <div className="table-responsive">
             <table className="table table-striped table-sm">
@@ -12,83 +35,17 @@ function DataTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>15/04/2021</td>
-                        <td>Carlito Tevez</td>
-                        <td>39</td>
-                        <td>21</td>
-                        <td>16017.00</td>
-                    </tr>
-                    <tr>
-                        <td>01/05/1994</td>
-                        <td>Airton Senna</td>
-                        <td>84</td>
-                        <td>84</td>
-                        <td>39017.00</td>
-                    </tr>
-                    <tr>
-                        <td>29/09/2012</td>
-                        <td>Hebe Camargo</td>
-                        <td>50</td>
-                        <td>49</td>
-                        <td>23017.00</td>
-                    </tr>
-                    <tr>
-                        <td>29/05/2021</td>
-                        <td>Marcos Mion</td>
-                        <td>23</td>
-                        <td>17</td>
-                        <td>15017.00</td>
-                    </tr>
-                    <tr>
-                        <td>15/02/2021</td>
-                        <td>Neymar</td>
-                        <td>11</td>
-                        <td>05</td>
-                        <td>5017.00</td>
-                    </tr>
-                    <tr>
-                        <td>05/08/2021</td>
-                        <td>João Dória</td>
-                        <td>01</td>
-                        <td>1</td>
-                        <td>1017.00</td>
-                    </tr>
-                    <tr>
-                        <td>17/02/2021</td>
-                        <td>Jim Carrey</td>
-                        <td>69</td>
-                        <td>53</td>
-                        <td>38017.00</td>
-                    </tr>
-                    <tr>
-                        <td>23/04/2021</td>
-                        <td>Wesley Safadão</td>
-                        <td>15</td>
-                        <td>09</td>
-                        <td>11017.00</td>
-                    </tr>
-                    <tr>
-                        <td>18/04/2021</td>
-                        <td>Bon Jovi</td>
-                        <td>79</td>
-                        <td>75</td>
-                        <td>75017.00</td>
-                    </tr>
-                    <tr>
-                        <td>09/04/2021</td>
-                        <td>Raul Seixas</td>
-                        <td>63</td>
-                        <td>25</td>
-                        <td>64017.00</td>
-                    </tr>
-                    <tr>
-                        <td>07/09/2021</td>
-                        <td>Nelio Alves</td>
-                        <td>100</td>
-                        <td>100</td>
-                        <td>150017.00</td>
-                    </tr>
+                    {page.content?.map(item => (
+                        <tr key={item.id}>
+                            <td>{formatLocalDate(item.date, "dd/MM/yyyy")}</td>
+                            <td>{item.seller.name}</td>
+                            <td>{item.visited}</td>
+                            <td>{item.deals}</td>
+                            <td>{item.amount.toFixed(2)}</td>
+                        </tr>
+                    ))}
+
+
                 </tbody>
             </table>
         </div>
