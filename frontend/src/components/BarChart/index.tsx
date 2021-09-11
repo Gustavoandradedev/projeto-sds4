@@ -12,7 +12,7 @@ function BarChart() {
 
     const mockData = {
         labels: {
-            categories: ['Carlito Tevez', 'Airton Senna', 'Hebe Camargo', 'Marcos Mion', 'Neymar', 'João Dória', 'Jim Query',
+            categories: ['Carlito Tevez', 'Airton Senna', 'Hebe Camargo', 'Marcos Mion', 'Neymar', 'João Dória', 'Jim Carrey',
             'Wesley Safadão', 'Bon Jovi', 'Raul Seixas', 'Nelio Alves']
         },
         series: [
