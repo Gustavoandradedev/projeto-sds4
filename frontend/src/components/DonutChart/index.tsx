@@ -34,7 +34,7 @@ function DonutChart() {
             options={{ ...options, labels: chartData.labels }}
             series={chartData.series}
             type="donut"
-            height="240"
+            height="320"
         />
     );
 }
