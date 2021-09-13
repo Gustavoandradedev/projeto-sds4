@@ -8,7 +8,7 @@ function Home() {
             <NavBar />
             <div className="container">
                 <div className="jumbotron">
-                    <br/><br/><br/><br/>
+                    <br/><br/><br/>
                     <h1 className="display-4"><b>DSVendas</b></h1>
                     <p className="p"><b>Analise o desempenho das suas vendas por diferentes perspectivas</b></p>
                     <hr />
